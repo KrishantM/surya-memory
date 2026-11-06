@@ -1,0 +1,18 @@
+{
+  "name": "memory-sync",
+  "displayName": "Surya Memory",
+  "version": "0.1.0",
+  "description": "Keeps Claude Code's memory in step across your machines through your own private GitHub repo. Overlapping edits keep both sides, nothing is lost, and nothing runs on anyone else's server.",
+  "author": { "name": "Krishant Maharaj", "url": "https://github.com/KrishantM" },
+  "repository": "https://github.com/KrishantM/surya-memory",
+  "license": "MIT",
+  "keywords": ["memory", "sync", "git", "obsidian", "multi-machine"],
+  "userConfig": {
+    "memory_dir": {
+      "type": "directory",
+      "title": "Memory folder (optional)",
+      "description": "Sync this folder in every session. Leave empty to sync the memory folder of whichever project the session is in.",
+      "required": false
+    }
+  }
+}

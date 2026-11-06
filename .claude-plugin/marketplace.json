@@ -1,0 +1,15 @@
+{
+  "name": "surya",
+  "description": "Open-source tools from Surya that plug into Claude Code.",
+  "owner": {
+    "name": "Krishant Maharaj",
+    "url": "https://github.com/KrishantM"
+  },
+  "plugins": [
+    {
+      "name": "memory-sync",
+      "source": "./",
+      "description": "Sync Claude Code memory across machines through your own private GitHub repo."
+    }
+  ]
+}
