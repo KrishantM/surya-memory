@@ -1,7 +1,10 @@
 {
   "hooks": {
     "SessionStart": [
-      { "hooks": [ { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/memsync.sh\" pull", "timeout": 60 } ] }
+      { "hooks": [
+        { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/memsync.sh\" pull", "timeout": 60 },
+        { "type": "command", "command": "python3 \"${CLAUDE_PLUGIN_ROOT}/scripts/surya-memory\" refresh-runtime >/dev/null 2>&1 || true", "timeout": 20 }
+      ] }
     ],
     "Stop": [
       { "hooks": [ { "type": "command", "command": "bash \"${CLAUDE_PLUGIN_ROOT}/scripts/memsync.sh\" push", "timeout": 60 } ] }

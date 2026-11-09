@@ -1,17 +1,28 @@
 {
-  "name": "memory-sync",
+  "name": "surya-memory",
   "displayName": "Surya Memory",
-  "version": "0.1.0",
-  "description": "Keeps Claude Code's memory in step across your machines through your own private GitHub repo. Overlapping edits keep both sides, nothing is lost, and nothing runs on anyone else's server.",
-  "author": { "name": "Krishant Maharaj", "url": "https://github.com/KrishantM" },
+  "version": "0.2.0",
+  "description": "One memory, in plain files you own, for Claude Code and every other AI tool you use. Syncs across your machines through your own private GitHub repo. You can see it, talk to it and undo anything.",
+  "author": {
+    "name": "Krishant Maharaj",
+    "url": "https://github.com/KrishantM"
+  },
   "repository": "https://github.com/KrishantM/surya-memory",
   "license": "MIT",
-  "keywords": ["memory", "sync", "git", "obsidian", "multi-machine"],
+  "keywords": [
+    "memory",
+    "sync",
+    "mcp",
+    "git",
+    "obsidian",
+    "multi-machine",
+    "codex"
+  ],
   "userConfig": {
     "memory_dir": {
       "type": "directory",
       "title": "Memory folder (optional)",
-      "description": "Sync this folder in every session. Leave empty to sync the memory folder of whichever project the session is in.",
+      "description": "Use this folder as your memory. Leave empty to use the store from setup, or the folder of whichever project the session is in.",
       "required": false
     }
   }

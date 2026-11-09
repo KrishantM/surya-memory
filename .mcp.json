@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "surya-memory": {
+      "command": "python3",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/scripts/surya-memory", "serve"],
+      "env": { "SURYA_MEMORY_DIR": "${user_config.memory_dir}" }
+    }
+  }
+}

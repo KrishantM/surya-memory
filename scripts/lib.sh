@@ -19,11 +19,14 @@ HOST="${MEMSYNC_HOST:-$( (scutil --get LocalHostName 2>/dev/null || hostname -s 
 # from the commit, so a pasted token never reaches the remote.
 SECRET_RE='sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,}|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|AKIA[0-9A-Z]{16}|xox[abpr]-[A-Za-z0-9-]{10,}|-----BEGIN [A-Z ]*PRIVATE KEY-----'
 
-# Which memory folder to sync: an explicit override, the plugin option, or the
-# memory folder Claude Code keeps for the current project.
+# Which memory folder to sync: an explicit override, the plugin option, the one
+# store setup pinned, or the folder Claude Code keeps for the current project.
 memory_dir() {
   if [ -n "${MEMSYNC_DIR:-}" ]; then printf '%s' "$MEMSYNC_DIR"; return; fi
   if [ -n "${CLAUDE_PLUGIN_OPTION_MEMORY_DIR:-}" ]; then printf '%s' "${CLAUDE_PLUGIN_OPTION_MEMORY_DIR/#\~/$HOME}"; return; fi
+  # One store for every project, when setup has pinned one.
+  local pinned="${SURYA_MEMORY_HOME:-$HOME/.surya-memory}/store-path"
+  if [ -s "$pinned" ]; then local p; p="$(head -1 "$pinned")"; printf '%s' "${p/#\~/$HOME}"; return; fi
   local proj="${CLAUDE_PROJECT_DIR:-$PWD}"
   printf '%s/.claude/projects/%s/memory' "$HOME" "$(printf '%s' "$proj" | sed 's/[^A-Za-z0-9]/-/g')"
 }

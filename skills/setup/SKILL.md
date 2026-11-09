@@ -1,21 +1,29 @@
 ---
 name: setup
-description: Turn on memory sync for this machine. Use when the user asks to sync, back up or share Claude's memory across machines, or to set up memory-sync.
+description: Set up Surya Memory, one memory for every project and AI tool, synced across machines. Use when the user asks to set up memory, sync memory across machines, share memory with Codex or other tools, or to set up memory sync.
 ---
 
-# Set up memory sync
+# Set up Surya Memory
 
-Memory sync keeps this project's Claude Code memory folder in a private GitHub repo that the user owns, and syncs it when a session starts and after each reply.
+Setup brings the memory scattered across this machine's projects into one folder, connects the AI tools it finds, and turns on sync through a private GitHub repo the user owns.
 
-1. Check the GitHub CLI: run `gh auth status`. If `gh` is missing, tell the user how to install it (`brew install gh` on a Mac). If it is not signed in, ask them to run `gh auth login` themselves. Never handle their GitHub password or token.
-2. Ask one question: is this the first machine, or is the memory already in a repo from another machine? If it is already in a repo, get the repo name.
-3. Run the setup script, adding `--repo NAME` when they named one:
+1. Show the plan. This changes nothing:
 
    ```bash
-   bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup.sh"
+   python3 "${CLAUDE_PLUGIN_ROOT}/scripts/surya-memory" setup
    ```
 
-   It creates a private repo called `agent-memory` if none exists, refuses a public one, merges any memory already on this machine instead of replacing it, and pushes.
-4. Tell the user in two or three plain sentences what happened: the folder, the repo, and that it now syncs by itself. On their other machines they install this plugin and say "set up memory sync" with the same repo name.
+   Tell the user in plain words what it found and what it will do. Mention any name clashes. Both versions are kept.
 
-If the script fails, show its message and the last lines of `.git/memsync/log` in the memory folder. Don't retry with different flags without asking.
+2. Ask only what the plan leaves open:
+   - Do they want sync across machines? If not, add `--no-sync`.
+   - If yes, run `gh auth status`. If `gh` is missing, tell them how to install it (`brew install gh` on a Mac). If it is not signed in, ask them to run `gh auth login` themselves. Never handle their GitHub password or token.
+   - Is the memory already in a repo from another machine? If so, add `--repo NAME`.
+
+3. Once they say yes, run the same command with `--yes` and the flags from step 2. The originals are left where they are, and any settings file it changes is backed up first.
+
+4. Tell them in two or three sentences what happened: where the memory now lives, which tools are connected, and that they should restart those tools. On other machines they install this plugin and do the same with the same repo name.
+
+If a step fails, show its message. Don't retry with different flags without asking.
+
+To sync one project's memory folder and nothing else, without one shared store, run `bash "${CLAUDE_PLUGIN_ROOT}/scripts/setup.sh"` instead.

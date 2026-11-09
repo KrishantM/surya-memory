@@ -7,9 +7,9 @@
   },
   "plugins": [
     {
-      "name": "memory-sync",
+      "name": "surya-memory",
       "source": "./",
-      "description": "Sync Claude Code memory across machines through your own private GitHub repo."
+      "description": "One memory for every AI tool, in plain files you own, synced through your own private GitHub repo."
     }
   ]
 }
